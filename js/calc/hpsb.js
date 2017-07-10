@@ -221,3 +221,223 @@ function dec3(){
 		alert("Cannot decrement if runs is less than 0");
 	}
 }
+
+var btnDownload = document.getElementById("btnDl"), btnUpload = document.getElementById("btnUl");
+
+
+	btnDownload.addEventListener("click",download);	
+	btnUpload.addEventListener("click", upload);
+	
+
+//need to validate upload data
+
+
+function validateUpload(ulInput){
+	"use strict";
+	
+	var arr;
+	arr = ulInput.split(",");	
+	
+	
+	
+	//indices 1,4,7,10,13,16,18 must be positive
+	//index 16 must equal the sum of indices 1,4,7,10,13
+	//index 18 must be equal to ((index 7 * 1) + (index 10 * 2) + (index 13 * 3) )
+	//try a try catch block?
+	
+	if (arr[1]<0 || arr[4]<0 || arr[7]<0 || arr[10]<0 || arr[13]<0 || arr[16]<0 || arr[18]<0){
+		alert("Error: At least one value is negative");
+	}
+	else if ((arr[1]*1+arr[4]*1+arr[7]*1+arr[10]*1+arr[13]*1)*1 != arr[16]*1){
+		alert("Error: The number of runs fails to add up");
+	}
+	else if ((arr[7]*1 + (2*arr[10])*1 + (3*arr[13])*1)*1 != arr[18]*1){
+		alert("Error: The number of PSB's fails to add up");
+	}
+	
+	else{
+		numFail=arr[1];
+		num0=arr[4];
+		num1=arr[7];
+		num2=arr[10];
+		num3=arr[13];
+		numTotalHearts=arr[16];
+		numTotalPSB=arr[18];
+		calc();
+		update();
+	}
+			/*
+	numFail=arr[1];
+	num0=arr[4];
+	num1=arr[7];
+	num2=arr[10];
+	num3=arr[13];
+	numTotalHearts=arr[16];
+	numTotalPSB=arr[18];
+	*/
+}
+
+function upload(){
+	"use strict";
+	//input text
+	var input = prompt("Enter CSV Data");
+	//if nothing inputted
+	while(input===""){
+		input = prompt("Enter CSV Data");
+	}
+	//if cancel
+	if(input===null){
+		//don't save
+	}
+	//otherwise
+	else{
+		//check if valid
+		validateUpload(input);
+		/*
+		var arr;
+		arr = input.split(",");		
+		*/
+}
+}
+
+function download(){
+	"use strict";
+	var dlText = "Fails, " + numFail + ", " + numPFail.toFixed(2) + "%" + ",\n0 PSB, " + num0 + ", " + numP0.toFixed(2) + "%" + ",\n1 PSB, " + num1 + ", " + numP1.toFixed(2) + "%" + ",\n2 PSB, " + num2 + ", " + numP2.toFixed(2) + "%" + ",\n3 PSB, " + num3 + ", " + numP3.toFixed(2) +"%" + ",\nTotal Runs, " + numTotalHearts + ",\nTotal PSB, " + numTotalPSB;
+	var input = prompt("Enter a file name to save (extension will be added automatically)");
+	while(input===""){
+		input = prompt("Enter a file name to save (extension will be added automatically)");
+	}
+	if(input===null){
+		//don't save
+	}
+	else{
+		//save 
+		var output = window.document.createElement('a');
+		output.href = window.URL.createObjectURL(new Blob([dlText], {type: 'text/csv'}));
+		output.download = input + '.csv';
+		document.body.appendChild(output);
+		output.click();
+		document.body.removeChild(output);
+	}	
+}
+
+
+//sets
+var btnSetFail=document.getElementById("btnSetFail"), btnSet0=document.getElementById("btnSet0"), btnSet1=document.getElementById("btnSet1"), btnSet2=document.getElementById("btnSet2"), btnSet3=document.getElementById("btnSet3");
+//event listeners sets
+btnSetFail.addEventListener("click", setFail);
+btnSet0.addEventListener("click", set0);
+btnSet1.addEventListener("click", set1);
+btnSet2.addEventListener("click", set2);
+btnSet3.addEventListener("click", set3);
+var valid=true;
+// ***IMPORTANT ***  input validation
+
+function validate(number){
+	//check negative number
+	"use strict";
+	if(number<0){
+		alert("Enter a Positive Number");
+		valid=false;
+	}
+	//check non number
+	else if (isNaN(number)===true){
+		alert("Enter a Number");
+		valid=false;
+	}
+	//no input
+	else if (number==""){
+		alert("Enter a number");
+	}
+	//cancel
+	else if (number===null){
+		//do nothing
+	}
+	//valid input so far...maybe has a decimal
+	else{
+	//set number to int, rounding down
+	valid=true;
+	var output = number.split(".");
+	return output[0];
+	}
+}
+
+function setFail(){
+	"use strict";
+		var num=prompt("Enter value for Fails");
+		validate(num);
+		if (valid===true){
+			num = validate(num);
+			numTotalHearts-=numFail;
+			numTotalHearts = (numTotalHearts + num * 1);
+			numFail = num*1;
+			calc();
+			update();
+		}
+		else{}
+}
+function set0(){
+	"use strict";
+		var num=prompt("Enter value for 0 PSB");
+		validate(num);
+		if (valid===true){
+			num = validate(num);
+			numTotalHearts-=num0;
+			numTotalHearts = (numTotalHearts + num * 1);
+			num0 = num*1;
+			calc();
+			update();
+		}
+		else{}
+}
+
+function set1(){
+	"use strict";
+		var num=prompt("Enter value for 1 PSB");
+		validate(num);
+		if (valid===true){
+			num = validate(num);
+			numTotalHearts-=num1;
+			numTotalPSB-=(1*num1);
+			numTotalHearts = (numTotalHearts + num * 1);
+			num1 = num*1;
+			numTotalPSB += (1 * num);
+			calc();
+			update();
+		}
+		else{}
+}
+
+function set2(){
+		"use strict";
+		var num=prompt("Enter value for 2 PSB");
+		validate(num);
+		if (valid===true){
+			num = validate(num);
+			numTotalHearts-=num2;
+			numTotalPSB-=(2*num2);
+			numTotalHearts = (numTotalHearts + num * 1);
+			num2 = num*1;
+			numTotalPSB += (2 * num);
+			calc();
+			update();
+		}
+		else{}
+	
+}
+function set3(){
+		"use strict";
+		var num=prompt("Enter value for 3 PSB");
+		validate(num);
+		if (valid===true){
+			num = validate(num);
+			numTotalHearts-=num3;
+			numTotalPSB-=(3*num3);
+			numTotalHearts = (numTotalHearts + num * 1);
+			num3 = num*1;
+			numTotalPSB += (3 * num);
+			calc();
+			update();
+		}
+		else{}
+}
