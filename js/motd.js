@@ -10,7 +10,7 @@ motd_text[1]="Praise Helix";
 motd_text[2]="Why is Angry Pikachu angry? <img src='assets/Icons/0%20PSB.png' width='50' height='51' alt=''/>";
 motd_text[3]="Got RML's?";
 motd_text[4]="Much PSB. Such luck.";
-motd_text[5]="2 PSB's <em>AND</em> an RML?! <img src='assets/icons/bigBox.png' width='51' height='51' alt=''/>    <img src='assets/icons/smallBox.png' width='30' height='30' alt=''/>  <img src='assets/icons/smallBox.png' width='30' height='30' alt=''/>";
+motd_text[5]="2 PSB's <em>AND</em> an RML?! <img src='assets/Icons/bigBox.png' width='51' height='51' alt=''/>    <img src='assets/icons/smallBox.png' width='30' height='30' alt=''/>  <img src='assets/Icons/smallBox.png' width='30' height='30' alt=''/>";
 motd_text[6]="COINS!!!!";
 //motd_text[7]=Math.Pi().toFixed(20);
 //motd_text[8]=
