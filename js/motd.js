@@ -12,8 +12,6 @@ motd_text[3]="Got RML's?";
 motd_text[4]="Much PSB. Such luck.";
 motd_text[5]="2 PSB's <em>AND</em> an RML?! <img src='assets/Icons/bigBox.png' width='51' height='51' alt=''/>    <img src='assets/Icons/smallBox.png' width='30' height='30' alt=''/>  <img src='assets/Icons/smallBox.png' width='30' height='30' alt=''/>";
 motd_text[6]="COINS!!!!";
-//motd_text[7]=Math.Pi().toFixed(20);
-//motd_text[8]=
 
 //"randomly" pick an element of the array
 //by using [array].length, we make sure to stay within array's bounds
